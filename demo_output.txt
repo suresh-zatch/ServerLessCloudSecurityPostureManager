@@ -1,0 +1,131 @@
+════════════════════════════════════════════════════════════
+  SERVERLESS CSPM SCAN REPORT
+  Account: 123456789012  |  Region: us-east-1
+  Timestamp: 2026-08-12T03:38:01.274590+00:00
+════════════════════════════════════════════════════════════
+
+  Summary: {'CRITICAL': 4, 'HIGH': 1, 'MEDIUM': 2, 'LOW': 0, 'INFO': 0}
+
+  [MEDIUM]   S3_PUBLIC_ACCESS_BLOCK    — customer-data-export-public
+             → Public Access Block configuration is missing
+
+  [CRITICAL] S3_PUBLIC_POLICY          — customer-data-export-public
+             → Bucket policy allows public access with wildcard Principal '*'
+
+  [MEDIUM]   S3_PUBLIC_ACCESS_BLOCK    — public-assets-static-media
+             → Public Access Block configuration is missing
+
+  [HIGH]     S3_PUBLIC_ACL             — public-assets-static-media
+             → Bucket ACL grants public READ to http://acs.amazonaws.com/groups/global/AllUsers
+
+  [CRITICAL] SG_OPEN_INBOUND           — sg-2eb80eb059611a61d
+             → Port 22 (SSH) open to 0.0.0.0/0
+
+  [CRITICAL] SG_OPEN_INBOUND           — sg-1c9e108a4f7f0d294
+             → Port 5432 (PostgreSQL) open to 0.0.0.0/0
+
+  [CRITICAL] SG_OPEN_INBOUND           — sg-3f716c7d44ea52de0
+             → Port 3389 (RDP) open to ::/0
+
+════════════════════════════════════════════════════════════
+
+============================================================
+FULL JSON PAYLOAD:
+============================================================
+{
+  "account_id": "123456789012",
+  "region": "us-east-1",
+  "scan_timestamp": "2026-08-12T03:38:01.274590+00:00",
+  "findings": [
+    {
+      "resource_type": "S3",
+      "resource_id": "customer-data-export-public",
+      "check_type": "CheckType.S3_PUBLIC_ACCESS_BLOCK",
+      "severity": "Severity.MEDIUM",
+      "detail": "Public Access Block configuration is missing",
+      "region": "",
+      "metadata": {}
+    },
+    {
+      "resource_type": "S3",
+      "resource_id": "customer-data-export-public",
+      "check_type": "CheckType.S3_PUBLIC_POLICY",
+      "severity": "Severity.CRITICAL",
+      "detail": "Bucket policy allows public access with wildcard Principal '*'",
+      "region": "",
+      "metadata": {
+        "statement_sid": "AllowPublicRead"
+      }
+    },
+    {
+      "resource_type": "S3",
+      "resource_id": "public-assets-static-media",
+      "check_type": "CheckType.S3_PUBLIC_ACCESS_BLOCK",
+      "severity": "Severity.MEDIUM",
+      "detail": "Public Access Block configuration is missing",
+      "region": "",
+      "metadata": {}
+    },
+    {
+      "resource_type": "S3",
+      "resource_id": "public-assets-static-media",
+      "check_type": "CheckType.S3_PUBLIC_ACL",
+      "severity": "Severity.HIGH",
+      "detail": "Bucket ACL grants public READ to http://acs.amazonaws.com/groups/global/AllUsers",
+      "region": "",
+      "metadata": {
+        "permission": "READ",
+        "grantee_uri": "http://acs.amazonaws.com/groups/global/AllUsers"
+      }
+    },
+    {
+      "resource_type": "SecurityGroup",
+      "resource_id": "sg-2eb80eb059611a61d",
+      "check_type": "CheckType.SG_OPEN_INBOUND",
+      "severity": "Severity.CRITICAL",
+      "detail": "Port 22 (SSH) open to 0.0.0.0/0",
+      "region": "us-east-1",
+      "metadata": {
+        "sg_name": "dev-bastion-host-sg",
+        "vpc_id": "vpc-b18ea628e48fee421",
+        "from_port": 22,
+        "to_port": 22,
+        "protocol": "tcp",
+        "cidr": "0.0.0.0/0"
+      }
+    },
+    {
+      "resource_type": "SecurityGroup",
+      "resource_id": "sg-1c9e108a4f7f0d294",
+      "check_type": "CheckType.SG_OPEN_INBOUND",
+      "severity": "Severity.CRITICAL",
+      "detail": "Port 5432 (PostgreSQL) open to 0.0.0.0/0",
+      "region": "us-east-1",
+      "metadata": {
+        "sg_name": "prod-db-cluster-sg",
+        "vpc_id": "vpc-b18ea628e48fee421",
+        "from_port": 5432,
+        "to_port": 5432,
+        "protocol": "tcp",
+        "cidr": "0.0.0.0/0"
+      }
+    },
+    {
+      "resource_type": "SecurityGroup",
+      "resource_id": "sg-3f716c7d44ea52de0",
+      "check_type": "CheckType.SG_OPEN_INBOUND",
+      "severity": "Severity.CRITICAL",
+      "detail": "Port 3389 (RDP) open to ::/0",
+      "region": "us-east-1",
+      "metadata": {
+        "sg_name": "win-admin-rdp-sg",
+        "vpc_id": "vpc-b18ea628e48fee421",
+        "from_port": 3389,
+        "to_port": 3389,
+        "protocol": "tcp",
+        "cidr": "::/0"
+      }
+    }
+  ],
+  "total_checks": 7
+}

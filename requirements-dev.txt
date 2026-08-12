@@ -1,0 +1,6 @@
+-r requirements.txt
+moto[s3,ec2,sts]>=5.0.0
+pytest>=8.0.0
+pytest-cov>=5.0.0
+black>=24.0
+flake8>=7.0
